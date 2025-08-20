@@ -1,52 +1,103 @@
-# RAG FastAPI + Chroma Starter
+# RAG FastAPI + Chroma Starter 🚀
 
-A minimal Retrieval-Augmented Generation (RAG) pipeline you can run locally or in Docker. Upload PDFs/TXT, embed chunks in ChromaDB, retrieve relevant context, and (optionally) generate an answer using OpenAI. If you don't set an OpenAI key, the API returns the best matching context as a fallback.
+This is a **Retrieval-Augmented Generation (RAG)** starter project built with **FastAPI**, **ChromaDB**, and **Google Generative AI (Gemini)**.  
+It lets you upload documents, embed them into a vector store (Chroma), and ask questions that are answered using both retrieval and LLMs.
 
-## Features
-- Upload up to 20 docs (starter supports PDF/TXT).
-- Chunking with overlap for better retrieval.
-- SentenceTransformer embeddings (default: `all-MiniLM-L6-v2`).
-- ChromaDB persistent store.
-- Endpoints: `/upload`, `/query`, `/metadata`, `/health`.
-- Docker + docker-compose.
-- Simple tests.
+---
 
-## Quick Start (Local)
-1. **Python 3.11+** recommended.
-2. Create & activate venv (optional).
-3. Install requirements:
-   ```bash
-   pip install -r requirements.txt
-   ```
-4. Create a `.env` (or copy `.env.example`) and set values.
-   - If you have an OpenAI key, add `OPENAI_API_KEY=...`.
-5. Run API:
-   ```bash
-   uvicorn app.main:app --reload
-   ```
-6. Open docs: http://127.0.0.1:8000/docs
+## 🌐 Live Demo
+👉 [API Docs (Swagger UI)](https://rag-glsp.onrender.com/docs)
 
-### Endpoints
-- `POST /upload` (multipart/form-data): Upload a PDF/TXT.
-- `POST /query` (application/json):
-  ```json
-  { "query": "What is this document about?", "top_k": 4 }
-  ```
-- `GET /metadata`: List uploaded docs.
-- `GET /health`: Health check.
+---
 
-## Docker
-Build and run:
+## ✨ Features
+- ⚡ FastAPI backend with auto-generated Swagger UI
+- 📚 Document ingestion & embedding using ChromaDB
+- 🔎 Semantic search over documents
+- 🤖 Answer generation using Google Gemini (`google-generativeai`)
+- 🐳 Dockerized for easy deployment
+- ☁️ Deployed on [Render](https://render.com/)
+
+---
+
+## 🛠️ Tech Stack
+- [FastAPI](https://fastapi.tiangolo.com/)
+- [ChromaDB](https://www.trychroma.com/)
+- [Google Generative AI](https://ai.google.dev/)
+- [Uvicorn](https://www.uvicorn.org/)
+- [Docker](https://www.docker.com/)
+
+---
+
+## 🚀 Getting Started (Local)
+
+### 1️⃣ Clone Repo
+```bash
+git clone https://github.com/<your-username>/<your-repo>.git
+cd rag-fastapi-chroma-starter
+```
+
+### 2️⃣ Create `.env`
+Make a `.env` file with your API key:
+```env
+GOOGLE_API_KEY=your_google_api_key_here
+CHROMA_DIR=/app/chroma
+METADATA_DB=/app/metadata.db
+```
+
+### 3️⃣ Run with Docker
 ```bash
 docker compose up --build
 ```
-API will be on `http://localhost:8000`.
 
-## Tests
+App will be available at **http://localhost:8000/docs**
+
+---
+
+## 📦 Deployment
+
+This project is already deployed on **Render**:  
+👉 [https://rag-glsp.onrender.com/docs](https://rag-glsp.onrender.com/docs)
+
+To deploy your own:
+1. Push repo to GitHub.
+2. Create new **Web Service** on [Render](https://render.com/).
+3. Select **Docker environment**.
+4. Add environment variables (same as `.env`).
+5. Deploy 🚀
+
+---
+
+## 🧪 API Usage
+
+- Swagger UI: `/docs`
+- Redoc: `/redoc`
+
+Example request (search):
 ```bash
-pytest -q
+curl -X POST "https://rag-glsp.onrender.com/search"   -H "Content-Type: application/json"   -d '{"query": "What is RAG?"}'
 ```
 
-## Notes
-- This starter uses local `sentence-transformers` embeddings by default; the first run will download the model.
-- For bigger deployments, swap Chroma for a managed vector DB and add auth, rate limits, and better chunking/tokenization.
+---
+
+## 📂 Project Structure
+```
+├── app/
+│   ├── main.py          # FastAPI entrypoint
+│   ├── rag.py           # RAG logic (embedding, search, answer generation)
+│   └── ...
+├── requirements.txt
+├── Dockerfile
+├── docker-compose.yml
+├── README.md
+└── .env.example
+```
+
+---
+
+## 🙌 Acknowledgements
+- [FastAPI](https://fastapi.tiangolo.com/)
+- [Chroma](https://www.trychroma.com/)
+- [Google Generative AI](https://ai.google.dev/)
+
+---
