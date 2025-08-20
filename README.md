@@ -1,5 +1,5 @@
 # RAG FastAPI + Chroma Starter
-
+LIVE WORKING URL - https://7d089ae3d34d.ngrok-free.app/docs    PLEASE CHECK ***
 A minimal Retrieval-Augmented Generation (RAG) pipeline you can run locally or in Docker. Upload PDFs/TXT, embed chunks in ChromaDB, retrieve relevant context, and (optionally) generate an answer using OpenAI. If you don't set an OpenAI key, the API returns the best matching context as a fallback.
 
 ## Features
