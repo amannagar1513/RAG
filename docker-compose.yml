@@ -1,0 +1,11 @@
+services:
+  rag:
+    build: .
+    container_name: rag-fastapi
+    env_file:
+      - .env
+    volumes:
+      - ./chroma:/app/chroma
+      - ./_tmp:/app/_tmp
+    ports:
+      - "8000:8000"
